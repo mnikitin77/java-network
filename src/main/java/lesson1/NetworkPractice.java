@@ -5,18 +5,22 @@ import java.net.SocketException;
 
 public class NetworkPractice {
 
+    private final int INITIAL_SB_CAPACITY = 1024;
+    private StringBuilder sb = new StringBuilder(INITIAL_SB_CAPACITY);
+
     public static void main(String[] args) throws SocketException {
 
         System.out.println("Name\tUp\tVirtual\tLoopback");
         System.out.println("----------------------------------------------------------");
-        StringBuilder sb = new StringBuilder();
+
+        var app = new NetworkPractice();
 
         NetworkInterface.networkInterfaces()
-                .map(it -> toNetworkInsterfaceInfo(it, sb))
+                .map(it -> app.toNetworkInterfaceInfo(it))
                 .forEach(System.out::println);
     }
 
-    private static String toNetworkInsterfaceInfo(final NetworkInterface ni, final StringBuilder sb) {
+    private String toNetworkInterfaceInfo(final NetworkInterface ni) {
         try {
             sb
                     .append(ni)
