@@ -16,7 +16,7 @@ public class NetworkPractice {
         var app = new NetworkPractice();
 
         NetworkInterface.networkInterfaces()
-                .map(it -> app.toNetworkInterfaceInfo(it))
+                .map(app::toNetworkInterfaceInfo)
                 .forEach(System.out::println);
     }
 
