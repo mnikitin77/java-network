@@ -6,7 +6,7 @@ import java.net.SocketException;
 public class NetworkPractice {
 
     private final int INITIAL_SB_CAPACITY = 1024;
-    private StringBuilder sb = new StringBuilder(INITIAL_SB_CAPACITY);
+    private final StringBuilder sb = new StringBuilder(INITIAL_SB_CAPACITY);
 
     public static void main(String[] args) throws SocketException {
 
