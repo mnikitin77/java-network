@@ -32,6 +32,8 @@ public class LiteHttpServer {
     }
 
     public void stop() {
-        server.stop(SERVER_SHUTDOWN_DELAY);
+        if (server != null) {
+            server.stop(SERVER_SHUTDOWN_DELAY);
+        }
     }
 }
