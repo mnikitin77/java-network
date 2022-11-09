@@ -53,7 +53,7 @@ public class HttpRequestHandlerService implements HttpHandler {
             try (final var responseBody = exchange.getResponseBody()) {
                 String response = "Hello Java";
                 exchange.sendResponseHeaders(200, response.length());
-                responseBody.write("Hello Java".getBytes(StandardCharsets.UTF_8));
+                responseBody.write(response.getBytes(StandardCharsets.UTF_8));
                 responseBody.flush();
             }
         } else {
