@@ -6,7 +6,12 @@
 
     <groupId>org.mnikitin</groupId>
     <artifactId>java-network</artifactId>
+    <packaging>pom</packaging>
     <version>DEV-SNAPSHOT</version>
+    <modules>
+        <module>udp-server</module>
+        <module>udp-client</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
