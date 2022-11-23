@@ -11,6 +11,8 @@
     <modules>
         <module>udp-server</module>
         <module>udp-client</module>
+        <module>nio-server</module>
+        <module>nio-client</module>
     </modules>
 
     <properties>
