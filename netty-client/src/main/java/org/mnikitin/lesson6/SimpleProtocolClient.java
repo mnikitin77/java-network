@@ -49,7 +49,8 @@ public class SimpleProtocolClient {
         t.setDaemon(true);
         t.start();
 
-//        Не знаю, как синхронизировать эти два потока между собой грамотно.
+// Не знаю, как синхронизировать эти два потока между собой грамотно.
+// Если делать всё в одном потоке, то блокируется на строке 41 f.channel().closeFuture().sync();
         Thread.sleep(5000);
     }
 
@@ -57,6 +58,7 @@ public class SimpleProtocolClient {
         response = null;
         requestPromise = channel.newPromise();
         channel.writeAndFlush(msg);
+// В строке 62 блокируется навсегда. Если вызывать с таймаутом, то по истечению исключение.
         requestPromise.awaitUninterruptibly();
         return response;
     }
