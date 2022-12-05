@@ -1,7 +1,9 @@
 package org.mnikitin.lesson6;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.*;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -34,10 +36,11 @@ public class SimpleProtocolServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         public void initChannel(SocketChannel ch) {
-                            ChannelPipeline p = ch.pipeline();
-                            p.addLast(new StringDecoder());
-                            p.addLast(new StringEncoder());
-                            p.addLast(new SimpleProtocolHandler(new SimpleProtocolServiceImpl()));
+                            ch.pipeline().addLast(
+                                    new StringDecoder(),
+                                    new StringEncoder(),
+                                    new SimpleProtocolHandler(new SimpleProtocolServiceImpl())
+                            );
                         }
                     })
                     .childOption(ChannelOption.SO_KEEPALIVE, true);

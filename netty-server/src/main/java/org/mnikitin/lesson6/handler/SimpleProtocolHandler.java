@@ -1,5 +1,6 @@
 package org.mnikitin.lesson6.handler;
 
+import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.mnikitin.lesson6.service.SimpleProtocolService;
@@ -25,6 +26,11 @@ public class SimpleProtocolHandler extends SimpleChannelInboundHandler<String> {
         var response = simpleProtocolService.processMessage(s);
         log.info("Sending response [{}] to client {}", response, ctx);
         ctx.writeAndFlush(response);
+    }
+
+    @Override
+    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+        ctx.writeAndFlush(Unpooled.EMPTY_BUFFER);
     }
 
     @Override
