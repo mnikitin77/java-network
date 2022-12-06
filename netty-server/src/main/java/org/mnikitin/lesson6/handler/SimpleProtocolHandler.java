@@ -23,13 +23,13 @@ public class SimpleProtocolHandler extends SimpleChannelInboundHandler<String> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String s) {
-        var response = simpleProtocolService.processMessage(s);
+        var response = simpleProtocolService.processMessage(s).toString();
         log.info("Sending response [{}] to client {}", response, ctx);
         ctx.writeAndFlush(response);
     }
 
     @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+    public void channelReadComplete(ChannelHandlerContext ctx) {
         ctx.writeAndFlush(Unpooled.EMPTY_BUFFER);
     }
 
@@ -37,5 +37,10 @@ public class SimpleProtocolHandler extends SimpleChannelInboundHandler<String> {
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         log.error("Closing connection for client {} due to exception: {}", ctx, cause);
         ctx.close();
+    }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) {
+        log.info("Client {} closed connection", ctx);
     }
 }
