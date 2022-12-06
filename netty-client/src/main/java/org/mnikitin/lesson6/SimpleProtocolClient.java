@@ -109,7 +109,9 @@ public class SimpleProtocolClient {
         @Override
         public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
             log.error("Closing connection due to exception: ", cause);
-            promiseOfResponse.setFailure(cause);
+            if (promiseOfResponse != null) {
+                promiseOfResponse.setFailure(cause);
+            }
             ctx.close();
         }
 
