@@ -8,13 +8,15 @@ public class SimpleProtocolClientTest {
 
     @BeforeAll
     static void init(){
-        new Thread(() -> {
+        var serverThread = new Thread(() -> {
             try {
                 new SimpleProtocolServer(12345);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-        }).start();
+        });
+        serverThread.setDaemon(true);
+        serverThread.start();
     }
 
     @Test
@@ -25,7 +27,7 @@ public class SimpleProtocolClientTest {
         client.start();
 
 
-        String response = client.sendRequest("5:hello");
+        var response = client.sendRequest("5:hello");
         Assertions.assertThat(response).isEqualTo("2:ok");
 
         response = client.sendRequest("4:cool");

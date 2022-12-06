@@ -14,7 +14,7 @@ public class SimpleProtocolClientApp {
         client.start();
 
         log.info("Sending message 1 [5:hello] to the server");
-        String response = client.sendRequest("5:hello");
+        var response = client.sendRequest("5:hello");
         log.info("Response on message 1: {}", response);
 
         log.info("Sending message 2 [4:cool] to the server");
