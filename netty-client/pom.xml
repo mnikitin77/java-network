@@ -17,6 +17,12 @@
             <artifactId>netty-all</artifactId>
             <version>4.1.85.Final</version>
         </dependency>
+        <dependency>
+            <groupId>org.mnikitin</groupId>
+            <artifactId>netty-server</artifactId>
+            <version>DEV-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
