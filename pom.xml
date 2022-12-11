@@ -15,6 +15,7 @@
         <module>nio-client</module>
         <module>netty-server</module>
         <module>netty-client</module>
+        <module>jetty-server</module>
     </modules>
 
     <properties>
