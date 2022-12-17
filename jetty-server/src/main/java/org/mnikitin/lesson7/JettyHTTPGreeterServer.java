@@ -41,14 +41,13 @@ public class JettyHTTPGreeterServer {
     }
 
     private void configureHttp(Server server) {
+        var http = new HttpConfiguration();
+        http.addCustomizer(new SecureRequestCustomizer());
+        // Configuration for HTTPS redirect
+        http.setSecurePort(HTTPS_PORT);
+        http.setSecureScheme("https");
+
         try (var connector = new ServerConnector(server)) {
-
-            var http = new HttpConfiguration();
-            http.addCustomizer(new SecureRequestCustomizer());
-            // Configuration for HTTPS redirect
-            http.setSecurePort(HTTPS_PORT);
-            http.setSecureScheme("https");
-
             connector.addConnectionFactory(new HttpConnectionFactory(http));
             connector.setPort(HTTP_PORT);
             server.addConnector(connector);
